@@ -1,7 +1,7 @@
 import Character from "./Character";
 
 type Character = {
-  __typename: string;
+  id: number;
   name: string;
   image: string;
 };
@@ -23,8 +23,12 @@ const CharactersList = (props: Props) => {
       <ul className="flex flex-wrap">
         {characterData?.characters.results.map((character: Character) => {
           return (
-            <li className="w-1/4 p-[5px]" key={character.name}>
-              <Character name={character.name} imgSrc={character.image} />
+            <li className="w-1/3 md:w-1/5 px-1 mb-2 md:px-2" key={character.id}>
+              <Character
+                id={character.id}
+                name={character.name}
+                imgSrc={character.image}
+              />
             </li>
           );
         })}

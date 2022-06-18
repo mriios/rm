@@ -1,11 +1,13 @@
+import type { NextPage } from "next";
 import Head from "next/head";
 import CharacterList from "../components/CharactersList/CharactersList";
 import { gql } from "@apollo/client";
 import client from "../apollo-client";
 import { GetStaticProps } from "next";
+import { GET_CHARACTERS } from "../apollo-queries";
 
 type Character = {
-  __typename: string;
+  id: number;
   name: string;
   image: string;
 };
@@ -23,7 +25,7 @@ interface Props {
   charactersQuery: CharactersQuery;
 }
 
-const Home = (_props: Props) => {
+const Home: NextPage<Props> = (_props: Props) => {
   let props = _props || {},
     charactersQuery = props.charactersQuery;
 
@@ -36,10 +38,6 @@ const Home = (_props: Props) => {
           content="Rick and Morty character catalog; browse and discover"
         />
       </Head>
-      <header className="text-center mb-10">
-        <h1>Rick and Morty</h1>
-        <h2>Made with GraphQL, Apollo, NextJS, TypeScript, TailWindCSS</h2>
-      </header>
       {charactersQuery.loading ? (
         <p>Loading...</p>
       ) : (
@@ -51,16 +49,7 @@ const Home = (_props: Props) => {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const { data, loading } = await client.query({
-    query: gql`
-      query Characters {
-        characters {
-          results {
-            name
-            image
-          }
-        }
-      }
-    `
+    query: GET_CHARACTERS
   });
 
   return {

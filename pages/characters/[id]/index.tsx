@@ -1,0 +1,93 @@
+import type { GetStaticPaths, NextPage } from "next";
+import Head from "next/head";
+import { gql } from "@apollo/client";
+import client from "../../../apollo-client";
+import { GetStaticProps } from "next";
+import { GET_CHARACTER } from "../../../apollo-queries";
+import CharacterDetail from "../../../components/CharacterDetail/CharacterDetail";
+import Link from "next/link";
+
+type NameObject = {
+  name: string;
+};
+
+type Character = {
+  episode: NameObject[];
+  id: string;
+  image: string;
+  name: string;
+  status: string;
+  origin: NameObject;
+  gender: string;
+  species: string;
+  location: NameObject;
+};
+
+type CharacterQuery = {
+  data: {
+    character: Character;
+  };
+  loading: boolean;
+};
+
+interface Props {
+  characterQuery: CharacterQuery;
+}
+
+const Character: NextPage<Props> = (props: Props) => {
+  let character = props.characterQuery.data.character;
+
+  return (
+    <>
+      <Head>
+        <title>{character.name} - Character Sheet</title>
+        <meta
+          name="description"
+          content={`Character sheet for ${character.name}`}
+        />
+      </Head>
+      <CharacterDetail character={character} />
+      <Link href="/">All Characters</Link>
+    </>
+  );
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { data } = await client.query({
+    query: gql`
+      query Characters {
+        characters {
+          results {
+            id
+          }
+        }
+      }
+    `
+  });
+
+  return {
+    fallback: false,
+    paths: data.characters.results.map((character: any) => ({
+      params: {
+        id: character.id.toString()
+      }
+    }))
+  };
+};
+
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
+  const characterId = context.params?.id;
+
+  const { data, loading } = await client.query({
+    query: GET_CHARACTER,
+    variables: { id: characterId }
+  });
+
+  return {
+    props: {
+      characterQuery: { data, loading }
+    }
+  };
+};
+
+export default Character;
