@@ -7,12 +7,17 @@ import { GET_CHARACTER } from "../../../apollo-queries";
 import CharacterDetail from "../../../components/CharacterDetail/CharacterDetail";
 import Link from "next/link";
 
+type Episode = {
+  id: string;
+  name: string;
+};
+
 type NameObject = {
   name: string;
 };
 
 type Character = {
-  episode: NameObject[];
+  episode: Episode[];
   id: string;
   image: string;
   name: string;
@@ -47,7 +52,9 @@ const Character: NextPage<Props> = (props: Props) => {
         />
       </Head>
       <CharacterDetail character={character} />
-      <Link href="/">All Characters</Link>
+      <Link href="/">
+        <a className="underline mt-20 block">Back to all characters</a>
+      </Link>
     </>
   );
 };
