@@ -53,7 +53,9 @@ const Character: NextPage<Props> = (props: Props) => {
       </Head>
       <CharacterDetail character={character} />
       <Link href="/">
-        <a className="underline mt-20 block">Back to all characters</a>
+        <a className="underline mt-20 block p-2 border border-white inline-block rounded hover:border-slate-400">
+          Back to all characters
+        </a>
       </Link>
     </>
   );

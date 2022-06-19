@@ -1,7 +1,7 @@
 interface Props {
-  header: string;
-  className: string;
-  children: JSX.Element[];
+  header?: string;
+  className?: string;
+  children: JSX.Element | JSX.Element[];
 }
 
 const Card = (props: Props) => {
@@ -10,7 +10,7 @@ const Card = (props: Props) => {
 
   return (
     <div
-      className={`bg-white border border-gray-200 m-2 rounded-xl shadow-lg p-5 w-full ${props.className}`}
+      className={`bg-white border border-gray-200 rounded-xl shadow-lg p-5 w-full ${props.className}`}
     >
       {header && (
         <>

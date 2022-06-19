@@ -7,16 +7,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
       <header className="text-center mb-10">
-        <h1 className="leading-tight">Rick and Morty Characters</h1>
-      </header>
-      <main className="max-w-[80%] mx-auto">
-        <Component {...pageProps} />
-      </main>
-      <footer>
-        <p className="text-xs text-center mt-10 mb-2">
+        <h1 className="leading-tight mb">Rick and Morty Characters</h1>
+        <p className="text-xs text-center">
           Made with NextJS, GraphQL, Apollo, TypeScript, TailWindCSS
         </p>
-      </footer>
+      </header>
+      <main className="max-w-[80%] mx-auto pb-10">
+        <Component {...pageProps} />
+      </main>
     </ApolloProvider>
   );
 }

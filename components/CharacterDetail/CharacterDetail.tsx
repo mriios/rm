@@ -4,6 +4,7 @@ import Modal from "../../components/Modal/Modal";
 import { useLazyQuery } from "@apollo/client";
 import { GET_EPISODE } from "../../apollo-queries";
 import Button from "../Button/Button";
+import Card from "../Card/Card";
 
 type Episode = {
   id: string;
@@ -101,7 +102,7 @@ const CharacterDetail = (props: Props) => {
             objectFit="contain"
           />
         </div>
-        <div>
+        <Card className="mb-auto">
           <ul>
             <li>
               <b>Status</b>: {character.status}
@@ -120,12 +121,15 @@ const CharacterDetail = (props: Props) => {
             </li>
             <li>
               <b>First Episode</b>:{" "}
-              <button className="underline" onClick={handleEpisodeModalOpen}>
+              <button
+                className="underline text-left"
+                onClick={handleEpisodeModalOpen}
+              >
                 {firstEpisode.name} (click for episode info)
               </button>
             </li>
           </ul>
-        </div>
+        </Card>
       </div>
       {episodeModalOpen && (
         <Modal
