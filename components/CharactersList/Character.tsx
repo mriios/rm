@@ -25,7 +25,7 @@ const Character = (props: Props) => {
               className="hover:scale-150 ease-in-out duration-300"
             />
           </div>
-          {name}
+          <p>{name}</p>
         </a>
       </Link>
     </div>
