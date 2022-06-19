@@ -1,5 +1,6 @@
 interface Props {
   header: string;
+  className: string;
   children: JSX.Element[];
 }
 
@@ -8,11 +9,13 @@ const Card = (props: Props) => {
     children = props.children;
 
   return (
-    <div>
+    <div
+      className={`bg-white border border-gray-200 m-2 rounded-xl shadow-lg p-5 w-full ${props.className}`}
+    >
       {header && (
         <>
-          <p>{header}</p>
-          <hr />
+          <h4>{header}</h4>
+          <hr className="my-3" />
         </>
       )}
       {children}

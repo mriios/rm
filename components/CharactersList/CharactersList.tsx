@@ -20,10 +20,10 @@ const CharactersList = (props: Props) => {
   return (
     <>
       <h3 className="text-center font-bold">All Characters</h3>
-      <ul className="flex flex-wrap">
+      <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {characterData?.characters.results.map((character: Character) => {
           return (
-            <li className="w-1/3 md:w-1/5 px-1 mb-2 md:px-2" key={character.id}>
+            <li className="mb-2" key={character.id}>
               <Character
                 id={character.id}
                 name={character.name}
