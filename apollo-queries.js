@@ -23,6 +23,18 @@ export const GET_CHARACTER = gql`
   }
 `;
 
+export const GET_FILTERED_CHARACTER = gql`
+  query GetFilteredCharacter($name: String!) {
+    characters(filter: { name: $name }) {
+      results {
+        id
+        image
+        name
+      }
+    }
+  }
+`;
+
 export const GET_CHARACTERS = gql`
   query Characters {
     characters {

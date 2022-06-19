@@ -3,7 +3,7 @@ import { useState } from "react";
 import Modal from "../../components/Modal/Modal";
 import { useLazyQuery } from "@apollo/client";
 import { GET_EPISODE } from "../../apollo-queries";
-import { stringify } from "querystring";
+import Button from "../Button/Button";
 
 type Episode = {
   id: string;
@@ -133,12 +133,7 @@ const CharacterDetail = (props: Props) => {
           backdropOnClick={handleEpisodeModalOpen}
         >
           <div>{modalBodyContent}</div>
-          <button
-            className="block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-5 ml-auto"
-            onClick={handleEpisodeModalOpen}
-          >
-            Close
-          </button>
+          <Button onClick={handleEpisodeModalOpen}>Close</Button>
         </Modal>
       )}
     </>

@@ -7,21 +7,23 @@ type Character = {
 };
 
 interface Props {
-  characterData: {
+  charactersData: {
     characters: {
       results: Character[];
     };
   };
+  searchValue: string | undefined;
 }
 
 const CharactersList = (props: Props) => {
-  let characterData = props.characterData;
+  let charactersData = props.charactersData,
+    searchValue = props.searchValue,
+    characterFeed;
 
-  return (
-    <>
-      <h3 className="text-center font-bold">All Characters</h3>
+  if (charactersData?.characters.results.length) {
+    characterFeed = (
       <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        {characterData?.characters.results.map((character: Character) => {
+        {charactersData?.characters.results.map((character: Character) => {
           return (
             <li className="mb-2" key={character.id}>
               <Character
@@ -33,6 +35,17 @@ const CharactersList = (props: Props) => {
           );
         })}
       </ul>
+    );
+  } else {
+    characterFeed = <p>No characters found</p>;
+  }
+
+  return (
+    <>
+      <h3 className="text-center font-bold capitalize">
+        {!searchValue ? "All Characters" : searchValue}
+      </h3>
+      {characterFeed}
     </>
   );
 };

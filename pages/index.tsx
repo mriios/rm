@@ -5,11 +5,19 @@ import { gql } from "@apollo/client";
 import client from "../apollo-client";
 import { GetStaticProps } from "next";
 import { GET_CHARACTERS } from "../apollo-queries";
+import SearchForm from "../components/SearchForm/SearchForm";
+import { useState } from "react";
 
 type Character = {
   id: number;
   name: string;
   image: string;
+};
+
+type searchData = {
+  characters: {
+    results: Character[];
+  };
 };
 
 type CharactersQuery = {
@@ -29,19 +37,34 @@ const Home: NextPage<Props> = (_props: Props) => {
   let props = _props || {},
     charactersQuery = props.charactersQuery;
 
+  const [charactersData, setCharactersData] = useState(charactersQuery.data);
+  const [searchValue, setSearchValue] = useState<string | undefined>();
+
+  const getSearchData = (
+    searchData: searchData,
+    searchQuery: string | undefined
+  ) => {
+    setCharactersData(searchData);
+    setSearchValue(searchQuery);
+  };
+
   return (
     <>
       <Head>
         <title>Rick and Morty Character Catalog</title>
         <meta
           name="description"
-          content="Rick and Morty character catalog; browse and discover"
+          content="Rick and Morty character catalog; browse and learn"
         />
       </Head>
+      <SearchForm onSubmit={getSearchData} />
       {charactersQuery.loading ? (
         <p>Loading...</p>
       ) : (
-        <CharacterList characterData={charactersQuery.data} />
+        <CharacterList
+          charactersData={charactersData}
+          searchValue={searchValue}
+        />
       )}
     </>
   );
