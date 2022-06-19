@@ -100,6 +100,8 @@ const CharacterDetail = (props: Props) => {
             alt={name}
             layout="fill"
             objectFit="contain"
+            placeholder="blur"
+            blurDataURL="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
           />
         </div>
         <Card className="mb-auto">

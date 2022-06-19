@@ -40,16 +40,16 @@ interface Props {
 }
 
 const Character: NextPage<Props> = (props: Props) => {
-  let character = props.characterQuery.data.character;
+  let character = props.characterQuery.data.character,
+    name = character.name,
+    pageMetaTitle = `${name} - Character Sheet`,
+    pageMetaDescription = `Character sheet for ${name} from Rick and Morty show`;
 
   return (
     <>
       <Head>
-        <title>{character.name} - Character Sheet</title>
-        <meta
-          name="description"
-          content={`Character sheet for ${character.name}`}
-        />
+        <title>{pageMetaTitle}</title>
+        <meta name="description" content={pageMetaDescription} />
       </Head>
       <CharacterDetail character={character} />
       <Link href="/">

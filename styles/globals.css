@@ -19,6 +19,18 @@
   h4 {
     font-size: 18px;
   }
+  @supports not (aspect-ratio: 1/1) {
+    [class^="aspect-"]::before {
+      float: left;
+      padding-top: 100%;
+      content: "";
+    }
+    [class^="aspect-"]::after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+  }
 }
 
 html,
